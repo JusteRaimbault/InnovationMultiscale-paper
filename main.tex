@@ -6,13 +6,13 @@
 
 \title{Innovation dynamics in multi-scalar systems of cities}
 % Multi-scalar innovation dynamics in systems of cities
-%\author{Juste Raimbault$^{1,2,3,4}$ \and Denise Pumain$^{4}$\\
-%\mbox{$^1$ LASTIG, Univ. Gustave Eiffel, IGN-ENSG}\\
-%\mbox{$^2$ CASA, UCL}\\
-%\mbox{$^3$} UPS CNRS 3611 ISC-PIF\\
-%\mbox{$^1$ UMR CNRS 8504 G{\'e}ographie-cit{\'e}}s\\
-%juste.raimbault@ign.fr} % email of corresponding author
-\author{}
+\author{Juste Raimbault$^{1,2,3,4}$ \and Denise Pumain$^{4}$\\
+\mbox{$^1$ LASTIG, Univ. Gustave Eiffel, IGN-ENSG}\\
+\mbox{$^2$ CASA, UCL}\\
+\mbox{$^3$} UPS CNRS 3611 ISC-PIF\\
+\mbox{$^4$ UMR CNRS 8504 G{\'e}ographie-cit{\'e}}s\\
+juste.raimbault@ign.fr}
+%\author{}
 % $^*$Each submission will undergo a double-blind review process. To this end, submissions should NOT contain any element that could reveal \\ the identity of the authors (author names, affiliations, funding details and acknowledgments), and should use the third person to refer to \\ previous work by the authors. These notes should be removed/commented out, but please remember that the page limit will remain, strictly, \\8 pages (not including citations) in case of acceptance, with mandatory name(s), affiliation(s), and email address of a corresponding author. \\
 
 
@@ -28,7 +28,7 @@
 \section{Introduction}
 
 % innovation, territorial systems and sustainable development
-
+Innovation and urban systems are two distinct dimensions of the Sustainable Development Goals
 
 % 
 \cite{binz2017global} global innovation systems
@@ -53,23 +53,67 @@
 \cite{rosas2020reconciling}
 
 
+% Research question
+% multiscale innovation dynamics (research objective?)
+% strong emergence: "overcomplicated" model is necessary
+% // empirical literature clusters
+
+
 \section{Multi-scalar innovation dynamics model}
 
 \subsection{Model rationale}
+
+% Macro : innov diff : d_I, d_G, beta, alpha_I, sigma_U, r_0
+% Meso : ~ biogeo optim : alpha_S firms ; (p_C,s_C crossover) ; (p_M, x_M) mutation ; s_P ; (p_E, d_E) exchanges
+
+% ABM at both scales
+% simplify: meso clusters correspond to each city (no "continuous" geo space - can occur in the case of MCRs for example, in our case assumed as one urban area)
 
 \cite{raimbault2022innovation}
 
 \cite{raimbault2020model}
 
 
+\subsection{Model description}
 
+% Macro : urban evolution / population adoption
+% Meso : firms - ideas / optimisation
+
+\subsubsection{Model agents and setup}
+
+At the macroscopic scale, agents in the model are $N$ urban areas, characterised by their population $P_i(t)$ and innovation genome $\delta_{ic}(t)$. The mesoscopic geographical scale corresponds to the internal representation of each area, which consists in a cluster of firms. The number of firms in each area scales with city size \citep{pumain2006evolutionary},%for foreign firms only
+ and we consider a global scaling exponent for the size of firms, in accordance with the empirical literature \cite{axtell2001zipf}.
+%Thus, a maximal size for each area scaling with population ensures such a global scaling law. NO -> should generate firms first and distribute after
+
+\subsubsection{Model dynamics}
+
+
+% 1 cycle meso : cycle innov : new innov si depasse un threshold (param "equivalent au beta") - puis reinit; nombre de firmes scale -> chance d'innover aussi? clarifier relations
+
+
+
+\subsubsection{Model indicators}
+
+% indicators / experiments
+% - firm utility vs social utility
+% - emissions ? (sdg approach? ~ - too far) : for contradictory optim? or between levels with utilities?
+% - downward causation test
 
 
 \section{Results}
 
-
+% Experiments
+% - multi-obj optimisation : global U vs companies? utility / diversity?
+% - specific experiment for downard causation : indicator?
 
 \section{Discussion}
+
+
+% Limits
+% - one dim product/utility space : // circeco
+% - eco structure simple -> // abmfirms
+% synthetic systems -> first level-specific data driven (not done yet) to be able to have multiscale data-driven? ~
+
 
 
 
