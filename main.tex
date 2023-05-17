@@ -6,14 +6,14 @@
 \mathtoolsset{showonlyrefs} 
 
 \title{Innovation dynamics in multi-scalar systems of cities}
-% Multi-scalar innovation dynamics in systems of cities
-%\author{Juste Raimbault$^{1,2,3,4}$ \and Denise Pumain$^{4}$\\
-%\mbox{$^1$ LASTIG, Univ. Gustave Eiffel, IGN-ENSG}\\
-%\mbox{$^2$ CASA, UCL}\\
-%\mbox{$^3$} UPS CNRS 3611 ISC-PIF\\
-%\mbox{$^4$ UMR CNRS 8504 G{\'e}ographie-cit{\'e}}s\\
-%juste.raimbault@ign.fr}
-\author{}
+
+\author{Juste Raimbault$^{1,2,3,4}$ \and Denise Pumain$^{4}$\\
+\mbox{$^1$ LASTIG, Univ. Gustave Eiffel, IGN-ENSG}\\
+\mbox{$^2$ CASA, UCL}\\
+\mbox{$^3$} UPS CNRS 3611 ISC-PIF\\
+\mbox{$^4$ UMR CNRS 8504 G{\'e}ographie-cit{\'e}}s\\
+juste.raimbault@ign.fr}
+
 % $^*$Each submission will undergo a double-blind review process. To this end, submissions should NOT contain any element that could reveal \\ the identity of the authors (author names, affiliations, funding details and acknowledgments), and should use the third person to refer to \\ previous work by the authors. These notes should be removed/commented out, but please remember that the page limit will remain, strictly, \\8 pages (not including citations) in case of acceptance, with mandatory name(s), affiliation(s), and email address of a corresponding author. \\
 
 
@@ -22,7 +22,7 @@
 
 \begin{abstract}
 % Abstract length should not exceed 250 words
-Innovation dynamics in social and technological systems are strongly linked with urban systems and their multi-scale properties. Understanding underlying processes is crucial for sustainable territorial planning. We introduce a multi-scalar model for innovation dynamics in systems of cities, coupling a macroscopic innovation diffusion and urban dynamics model with mesoscopic models for local innovation clusters. The model parameter space is explored, and we apply it to a bi-objective optimisation with objectives across scales. Implementing indicators for downward causation, we finally investigate with a diversity search algorithm the diverse regimes of emergence the model can produce. This suggests strong emergence is captured, confirming the relevance of multi-scale approaches to artificial societies and urban simulation.
+Innovation dynamics in social and technological systems are strongly linked to urban systems and their multi-scale properties. Understanding underlying processes is crucial for sustainable territorial planning. We introduce a multi-scalar model for innovation dynamics in systems of cities, coupling a macroscopic innovation diffusion and urban dynamics model with mesoscopic models for local innovation clusters. The model parameter space is explored, and we apply a bi-objective optimisation algorithm with objectives across scales. Implementing indicators for downward causation, we finally investigate with a diversity search algorithm the diverse regimes of emergence the model can produce. This suggests strong emergence is captured, confirming the relevance of multi-scale approaches to artificial societies and urban simulation.
 \end{abstract}
 
 % keywords
@@ -61,7 +61,7 @@ At the macroscopic scale, agents in the model are $N$ urban areas indexed by $i$
 
 The mesoscopic geographical scale corresponds to the internal representation of each area, which consists in a cluster of firms. The number of firms $N_i$ in each area scales with city size \citep{pumain2006evolutionary}, such that $N_i = N_0 \cdot \left(\frac{P_i (t_0)}{P_0 (t_0)}\right)^{\alpha_N}$. We furthermore consider a global rank-size law for the size of firms (number of employees), in accordance with the empirical literature \citep{axtell2001zipf}, given by $S_k = S_0 \cdot k^{- \alpha_S}$, where $k$ is sorted in decreasing order, and such that $1 \leq k \leq \sum_i N_i$. To distribute initial firms into the urban areas: (i) we assume that the size of the largest firm scales with city size $\max_{k\in i} S_k = S_0 \cdot k^{- \alpha_L}$; (ii) sampling the set of all firms previously generated, we select for each area its largest by choosing the one with a size closest to the one given by the previous law; (iii) remaining missing firms are uniformly drawn within the sample of firms smallest than the largest, starting with the smallest urban area such that all firms are distributed in the end.
 
-Each innovation cluster is initialised with random employees within each firm (an employee corresponding to a set of ideas, i.e. a multidimensional genome), and with a random fitness to maximise following \cite{raimbault2022innovation} given by a generalised Rastrigin function $y(\vec{x}) = - \sum_{i,j} m_{ij} \left[x_i^2 - 10 \cos\left(2 \pi x_i\right) \right] $ for an employee ideas $\vec{x}$ and $m_{ij}$ uniformly drawn random coefficients. Firms have uniformly distributed locations within each area. Each area has its own meso parameters (listed below), initialised at the same value but evolving in different ways with the macro trajectory of the city.
+Each innovation cluster is initialised with random employees within each firm (an employee corresponding to a set of ideas, i.e. a multidimensional genome), and with a random fitness to maximise following \cite{raimbault2022innovation} given by a generalised Rastrigin function $y(\vec{x}) = - \sum_{i,j} m_{ij} \left[x_i^2 - 10 \cos\left(2 \pi x_i\right) \right] $ for an employee ideas $\vec{x}$ and $m_{ij}$ uniformly drawn random coefficients. Such difficult optimisation landscapes have been used in the literature as a proxy of what firms seek to optimise. Firms have uniformly distributed locations within each area. Each area has its own meso parameters (listed below), initialised at the same value but evolving in different ways with the macro trajectory of the city.
 
 
 \subsubsection{Model dynamics}
@@ -90,9 +90,9 @@ The dynamics are simulated in an iterative way, starting from the initial state 
             with $\phi_c$ macro adoption levels, $d_G$ migration range parameter, $w_I$ weight parameter, and with a renormalisation by the average of gravity potentials (note the typo in \citep{raimbault2020model}: attractivity factors are indeed outside the exponential);
             \item innovative cities obtained from the meso-scale introduce new innovations, with an initial penetration rate $r_0$, and with a log-normal distributed random utility with average the current average of utilities and standard deviation a parameter $\sigma_U$ (the link between meso performance and macro utility is not endogenous, as it would require much more elaborated modelling of market processes).
         \end{itemize}
-\item \textbf{Top-down feedback:} we consider two different processes through which macro dynamics will influence the next meso innovation cycles, in a way similar to \cite{raimbault2021strong}; given the relative population growth of cities at the macro scale $\delta p = \frac{P_i(t)-P_i(t-1)}{\max_j P_i(t)-P_i(t-1)}$, we assume that this captures a dynamic urban environment with consequences on firm strategy and local exchanges (we do not consider innovation share dynamics as once again the underlying economic processes are to broad to link these with city global integration and performance);
+\item \textbf{Top-down feedback:} we consider two different processes through which macro dynamics will influence the next meso innovation cycles, in a way similar to \cite{raimbault2021strong}; given the relative population growth of cities at the macro scale $\delta p = \frac{P_i(t)-P_i(t-1)}{\max_j P_i(t)-P_i(t-1)}$, we assume that this captures a dynamic urban environment with consequences on firm strategy and local exchanges (we do not consider in this top-down feedback the other main process of the macro model, which are innovation share dynamics; once again the underlying economic processes are too broad to link these with city global integration and performance);
     \begin{itemize}
-        \item firm strategy is updated by changing crossover probability (organisation of R\&D teams) and mutation probability (access to resources) following \[p_C(t+1,i) = p_C (t,i)\cdot (1+ \beta_C \delta_p)\] and \[p_M(t+1,i) = p_M (t,i)\cdot (1+ \beta_M \delta_p)\] - a positive value for the $\beta_C$ parameter (resp. $\beta_M$) will mean that the company follows the city trend (more intensive research in growing area and less in stagnating ones), while a negative value will imply an inverse strategy (large research centers in less dynamic areas - which can occur for many other economic, geographical and social reasons, including policy incentive to redevelop such areas);
+        \item firm strategy is updated by changing crossover probability (organisation of R\&D teams) and mutation probability (access to resources) following \[p_C(t+1,i) = p_C (t,i)\cdot (1+ \beta_C \delta_p)\] and \[p_M(t+1,i) = p_M (t,i)\cdot (1+ \beta_M \delta_p)\] - a positive value for the $\beta_C$ parameter (resp. $\beta_M$) will mean that the company follows the city trend (more intensive research in growing area and less in stagnating ones), while a negative value will imply an inverse strategy (large research centres in less dynamic areas - which can occur for many other economic, geographical and social reasons, including policy incentive to redevelop such areas);
         \item the urban environment, in terms of informal exchanges, is also influenced in a similar way following
         \[p_E(t+1,i) = p_E (t,i)\cdot (1+ \beta_E \delta_p)\]
     \end{itemize}
@@ -116,14 +116,10 @@ Crucial indicators to answer our research question must be some proxy to measure
 
 \section{Results}
 
-% reorg: model parametrisation single subsec
-%\subsection{Setup for numerical experiments}
 
 \subsection{Model implementation}
 
-The simulation model is implemented in \texttt{scala} for performance purposes. The JIDT java library is used to estimate mutual information for the downward causation indicators \citep{lizier2014jidt}. The model is integrated into the OpenMOLE platform for model exploration and validation \citep{reuillon2013openmole}, which provides a transparent access to high performance computing environments and state-of-the-art sensitivity analysis and validation methods. Model source code and analysis of simulation results are available on an open git repository at \texttt{https://github.com/AnonymousAuthor1/ALife2023}.
-%Simulation data produced by the numerical experiments described below are available at \texttt{}.
-%  anon git repo ; anon dataverse?
+The simulation model is implemented in \texttt{scala} for performance purposes. The JIDT java library is used to estimate mutual information for the downward causation indicators \citep{lizier2014jidt}. The model is integrated into the OpenMOLE platform for model exploration and validation \citep{reuillon2013openmole}, which provides a transparent access to high performance computing environments and state-of-the-art sensitivity analysis and validation methods. Model source code and analysis of simulation results are available on an open git repository at \texttt{https://github.com/JusteRaimbault/}\\\texttt{InnovationMultiscale-model}.
 
 
 \subsubsection{Model parametrisation}
@@ -153,7 +149,7 @@ The parameter left free and that will be explored in the numerical experiments a
 % - statistical valid: LSH with many replications
 % ! rerun simus on grid
 
-We first test the statistical behavior of the model, in particular how much repetitions are needed to have a reasonable estimation of indicators. We use a Latin Hypercube Sampling to draw a few parameter points (10 points) in the full variable parameter space, and run 100 repetitions of the model on each. Estimating Sharpe ratios as the ratio between estimated mean and estimated standard deviation over the repetitions, we obtain across all macro and meso indicators all median ratios above 2, and a minimum across parameter points of 0.932 for the macro utility. Looking at all distance between couples of indicator averages, normalised by standard deviations (capturing the overlap between effect difference and standard errors), we find a minimal median of 0.3002 for meso diversity, while other indicators have a median around 0.4 (0.4264 for macro utility). This means a rather good statistical separability of parameter points, and that 10 repetitions are enough for the stochastic variability to induce smaller noise than confidence intervals for averages.
+We first test the statistical behavior of the model, in particular how much repetitions are needed to have a reasonable estimation of indicators. We explore a grid of 288 parameter points, and run 20 repetitions of the model on each. Estimating Sharpe ratios as the ratio between estimated mean and estimated standard deviation over the repetitions, we obtain across all macro and meso indicators all median ratios above or around 2, and a minimum across parameter points of 0.858 for the macro utility. Looking at all distance between couples of indicator averages, normalised by standard deviations (capturing the overlap between effect difference and standard errors), we find a minimal median of 0.19 for meso diversity, while other indicators have a median between 0.24 and 0.3. This means a rather good statistical separability of parameter points, and that 10 repetitions are enough for the stochastic variability to induce smaller noise than confidence intervals for averages.
 
 \subsection{Grid exploration}
 
@@ -163,7 +159,7 @@ We then turn to a grid exploration of a portion of the parameter space, to under
 
 
 
-We draw some plots of indicator behaviour in Fig.~\ref{fig:explo}. We find that the feedback parameter on the urban environment $\beta_E$ has a qualitative influence on the macro utility: while with a U-shape or stagnating for negative values, it become either strongly decreasing ($theta=1$) or increasing ($\theta=2$) as a function of $d_G$. This implies that policies can in some cases reverse the effect of geography, what would correspond to voluntary development of stagnating regions. The role of $d_I$ also qualitatively changes, meaning that its influence can be changed. A diversity of behaviours is also observed for the meso fitness. For both levels, $\theta$ also strongly changes qualitative behaviours - meaning that thresholds to access the market have in the end a long term impact on the overall system. Altogether, the influence of both feedback parameter can not be intuited from the beginning, and this first exploration allows diving in the complexity of model dynamics.
+We draw some plots of indicator behaviour in Fig.~\ref{fig:explo}. We find that the feedback parameter on the urban environment $\beta_E$ has a qualitative influence on the macro utility: while having comparatively small variations for negative values (left column), it becomes either strongly decreasing ($\theta=1$) or increasing ($\theta=2$) as a function of $d_G$. This implies that policies can in some cases reverse the effect of geography, what would correspond to voluntary development of stagnating regions. The role of $d_I$ also qualitatively changes, meaning that the distance of exchanges will affect differently interventions. A diversity of behaviours is also observed for the meso fitness. For both levels, $\theta$ also strongly changes qualitative behaviours - meaning that thresholds to access the market have in the end a long term impact on the overall system. Altogether, the influence of both feedback parameter can not be intuited from the beginning, and this first exploration allows diving in the complexity of model dynamics.
 
 \subsection{Multi-objective optimisation}
 
@@ -179,20 +175,20 @@ We run a NSGA2 bi-objective algorithm, for 10000 generations, with a population 
     \caption{Pareto front between the opposite of macro utility and the opposite of meso diversity (both to be minimised to maximise the original objectives). Point color gives interaction distance $d_G$ and point size the innovation threshold $\theta$.\label{fig:pareto}}
 \end{figure}
 
-We find first of all a very reduced number of points, suggesting that the optimisation is difficult. They however form a clean Pareto front, with a concave shape - on the contrary to convex fronts generally obtained. This means that extreme points are rather good compromises, witnessing very different regimes which can lead to optima. The middle point corresponds to long interaction distances, while extremities are local regimes, what could be evidence for a detrimental globalisation in that case. It is also the regime where innovation threshold is the highest, corresponding to a more competitive environment. This optimisation exercise confirms that both scales can be simultaneously taken into account and optimised in policy design.
+We find first of all a reduced number of points (10), suggesting that the optimisation is difficult. They however form a Pareto front, with a concave shape - on the contrary to convex fronts generally obtained. This means that extreme points are rather good compromises, witnessing very different regimes which can lead to optima. A middle point corresponds to long interaction distances (large $d_G$), while some points around and on the right extremity of the front are local regimes (small $d_G$), what could be evidence for a detrimental globalisation in that case. It is also a regime where innovation threshold is high, corresponding to a more competitive environment. This optimisation exercise confirms that both scales can be simultaneously taken into account and optimised in policy design.
 
 
 \subsection{Searching for diversity in regimes of emergence}
 
 % - specific experiment for downard causation : indicator? -> search with PSE?
 
-We finally use the downward causation indicators to investigate which kind of emergence the model produces. We apply the PSE (Pattern Space Exploration) algorithm, implemented in OpenMOLE by \cite{cherel2015beyond}, and which is a hitmap-based diversity search algorithm, to explore the feasible space of these indicators. We run the algorithm for 10000 generations, with 3 objectives $\Psi (U)$, $\Delta (U)$, $\Gamma (U)$, the downard causation indicators on macro utility.
+We finally use the downward causation indicators to investigate which kind of emergence the model produces. We apply the PSE (Pattern Space Exploration) algorithm, implemented in OpenMOLE by \cite{cherel2015beyond}, and which is a hitmap-based diversity search algorithm, to explore the feasible space of these indicators. We run the algorithm for 10000 generations, with 3 objectives $\Psi (U)$, $\Delta (U)$, $\Gamma (U)$, the downward causation indicators on macro utility.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\linewidth]{figures/pse-psi-delta-utility_colorGamma_sizetheta.png}
-    \caption{Scatter plot between $\Psi (U)$ and $\Delta (U)$, obtained with the PSE diversity search algorithm. Point color gives $\Gamma (U)$ and point size the innovation threshold $\theta$.\label{fig:pse}}
+    \caption{Scatter plot between $\Psi (U)$ and $\Delta (U)$, obtained with the PSE diversity search algorithm. Point colour gives $\Gamma (U)$ and point size the innovation threshold $\theta$.\label{fig:pse}}
 \end{figure}
 
 The point cloud obtained is shown in Fig.~\ref{fig:pse}. We find a rather covering cloud, meaning that the model covers a great variety of regimes of emergence. A part of the points are gathered around $\Psi \sim 0$ for varying $\Delta$, corresponding to cases with no causal emergence but downward causation. Several points, disseminated across the cloud, have a value of $\Gamma$ close to 0, implying an autonomy between scale for the positive $\Psi$. $\Delta$ is never negative nor close to 0, meaning that downward causation always occurs, what could have been expected through the explicit top-down feedback process. Altogether, this last experiments confirms that the model captures strong emergence, but also a great variety of causal regimes between scales.
@@ -227,13 +223,13 @@ The point cloud obtained is shown in Fig.~\ref{fig:pse}. We find a rather coveri
 
 We have introduced a multi-scalar model for innovation dynamics in systems of cities. Our numerical experiments show, beyond basic model validation and exploration, that (i) contradictory objectives can be optimised through policies across scales, suggesting that this type of approach could further be explored for territorial sustainability; (ii) strong emergence and a great diversity of emergence regimes are captured by the model - confirming the relevance of strongly coupling scale and building such a ``complicated'' model, beyond a single scale.
 
-Several limits can at this stage be identified, and should be worked on for future extensions. The unidimensional innovation space is a strong limitation, keeping the model abstract and difficult to link with data. The economic structure and processes is also very simplified, as we are closer to a phenomenological model. Coupling with economic agent-based models is a perspective fir this issue. Regarding the time scales and evolution of urban areas, we also did not include migration of employees - assuming constant team sizes - what is fine with the idea reinitialisation setting at each time step, but what would cause more problems if we add memories to companies and employees. In that context, team diversity is crucial for innovation, but the role of sizes and their evolution in time is less clear \citep{hoisl2017r} - so translating population migration directly into firm sizes may not be the best solution. We did not include changes in macro parameters as \cite{raimbault2021strong} does, what could be a way to incorporate more bottom-up feedback in the model.
+Several limits can at this stage be identified, and should be considered for future extensions. The unidimensional innovation space is a strong limitation, keeping the model abstract and difficult to link with data. The economic structure and processes is also very simplified, as we are closer to a phenomenological model. Coupling with economic agent-based models is a perspective for this issue. Regarding the time scales and evolution of urban areas, we also did not include migration of employees - assuming constant team sizes - what is fine with the idea of reinitialised settings at each macro time step, but what would cause more problems if we add memories to companies and employees. In that context, team diversity is crucial for innovation, but the role of sizes and their evolution in time is less clear \citep{hoisl2017r} - so translating population migration directly into firm sizes may not be the best solution. We did not include changes in macro parameters as \cite{raimbault2021strong} does, what could be a way to incorporate more bottom-up feedback in the model.
 
-Finally, future developments on empirical data would need some model adaptation and complicated data collection and processing work (in particular to find proxies for innovation, and also firm data which is quite rare), but would be necessary for real-world applications of the model beyond stylised policies.
+Finally, future developments on empirical data would need some model adaptation and complicated data collection and processing work. In particular, finding proxies for innovation, and also collecting firm data which is quite rare, are crucial issues. Such an empirical approach would however be necessary for real-world applications of the model beyond stylised policies.
 
 \section{Conclusion}
 
-This work introduced a first modelling and simulation step towards multi-scalar quantitative approaches to systems of cities, focused on innovation dynamics in our case. The numerical explorations, lead with advanced model validation techniques with the OpenMOLE software, confirm the relevance of the model, in particular through its ability to capture a diversity of emergence regimes. This consists a first step towards more elaborated integrated urban models for sustainable policies.
+This work introduced a first modelling and simulation step towards multi-scalar quantitative approaches to systems of cities, focused on innovation dynamics in this case. The numerical explorations, achieved with advanced model validation techniques with the OpenMOLE software, confirm the relevance of the model, in particular through its ability to capture a diversity of emergence regimes. This provides a first step towards more elaborated integrated urban models for sustainable policies.
 
 
 
