@@ -30,7 +30,8 @@
 \title{\textbf{Innovation dynamics in multi-scalar}}
 \author{Juste Raimbault$^{1,\ast}$ and Denise Pumain$^2$}
 \institute{$^1$ LASTIG, Univ. Gustave Eiffel, IGN-ENSG\\
-$^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
+$^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1\bigskip\\
+$\ast$ \texttt{juste.raimbault@ign.fr}}
 \titlegraphic{}
 
 % Layout of title and logos, some other possible logos are available in images folder
@@ -146,7 +147,7 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 				\item ``Artificial cities'' \cite{raimbault2020cities} and urban simulation approaches focus on a single scale
 			\end{itemize}
 			
-			$\rightarrow$ a new \textbf{simulation model} coupling innovation diffusion dynamics \textbf{between cities} (macro scale) with research cluster dynamics \textbf{within urban areas} (meso scale)
+			$\rightarrow$ a new \textbf{simulation model} coupling innovation diffusion dynamics \textbf{between cities} (macro) \cite{raimbault2020modelshort} with research cluster dynamics \textbf{within urban areas} (meso) \cite{raimbault2022innovationshort}
 		
 		}
 		%==============================================
@@ -173,24 +174,48 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 
 %Each innovation cluster is initialised with random employees within each firm (an employee corresponding to a set of ideas, i.e. a multidimensional genome), and with a random fitness to maximise following \cite{raimbault2022innovation} given by a generalised Rastrigin function $y(\vec{x}) = - \sum_{i,j} m_{ij} \left[x_i^2 - 10 \cos\left(2 \pi x_i\right) \right] $ for an employee ideas $\vec{x}$ and $m_{ij}$ uniformly drawn random coefficients. Such difficult optimisation landscapes have been used in the literature as a proxy of what firms seek to optimise. Firms have uniformly distributed locations within each area. Each area has its own meso parameters (listed below), initialised at the same value but evolving in different ways with the macro trajectory of the city.
 
-            \parbox{0.33\linewidth}{
-              
-              
-              
-              
-		      }
-            %\hspace{0.5cm}
-            \parbox{0.33\linewidth}{
-			    
-			    
-			    
-		      }
-		      
-		      \parbox{0.33\linewidth}{
-			    
-			    
-			    
-		      }
+
+
+            \begin{multicols}{3}
+            
+            Synthetic \textbf{system of cities} with populations following a Zipf law and random positions in the geographical space; within each city an \textbf{innovation cluster} is composed of firms, themselves composed by employees (ideas as real-valued genome), which aim at optimising a fixed random fitness (Rastrigin function).
+            
+            \vspace{1.5cm}
+            
+            \textbf{Iterated steps}, for $t_f$ macro time steps:
+            \begin{enumerate}
+\item \textbf{Meso cycle:} in each cluster for $t_m$ meso time steps:
+    \begin{itemize}
+        \item employee exchange ideas within firms (genome crossovers)
+        \item idea with best fitness is chosen by each company
+        \item ideas are informally exchanged between firms
+    \end{itemize}
+\item \textbf{Bottom-up feedback:} if relative fitness gain of the best firm exceeds a parameter  ($\delta f_i > \theta$), the corresponding city will innovate at the macro scale.
+\item \textbf{Macro step:} innovation are diffused between cities; population migration and growth follow spatial interactions based on attractivity; new innovations are added to cities' genomes.
+        
+\item \textbf{Top-down feedback:} firm strategy is updated by changing crossover probability and mutation probability, and the urban environment in terms of informal exchanges, both depending on relative population growth.
+\end{enumerate}
+            
+            \vspace{1.5cm}
+            
+            \textbf{Indicators:}
+            \begin{itemize}
+            	\item Macro observables: utility and diversity of innovations
+            	\item Meso observables: best fitness and diversity of ideas
+            	\item Indicators for downward causation from \cite{rosas2020reconcilingshort} ($\Delta$, $\Psi$, $\Gamma$) on these observables to quantify the strength of emergence
+            \end{itemize}
+            
+             \vspace{1.5cm}
+             
+             \textbf{Implementation:}
+             \begin{itemize}
+             	\item Model implemented in scala: \url{https://github.com/JusteRaimbault/InnovationMultiscale-model}
+             	\item Integrated into the OpenMOLE platform for model exploration and validation	\cite{reuillon2013openmole}
+             \end{itemize}
+
+            	
+            \end{multicols}
+
    
 		}
 		
@@ -207,7 +232,7 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 
 		
 		%==============================================
-		\block[titlewidthscale=0.5]{Model exploration}{
+		\block[titlewidthscale=0.4]{Model exploration}{
 
             \parbox{0.6\linewidth}{
               
@@ -217,18 +242,18 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
               
 		      }
             \hspace{0.5cm}
-            \parbox{0.4\linewidth}{
+            \parbox{0.37\linewidth}{
 			    
-			   
+			   \textbf{Grid exploration} of the parameter space, to explore main dynamics of the model; 10,000 replications for each parameter point; variety of indicator behaviours.
 			   
 			    \vspace{0.5cm}
 			  
 			    
-			    $\rightarrow$ 
+			    \textit{Left plot:} increasing then plateauing strength of emergence $\Psi$ for macro diversity, as a function of spatial interaction range $d_G$ and innovation diffusion range $d_I$, for varying top-down (columns) and bottom-up (rows) feedbacks.
 			    
-			     \vspace{0.5cm}
+			     %\vspace{0.5cm}
 			    
-			     $\rightarrow$ 
+			     %$\rightarrow$ variety of 
 			     
 		      }
 			
@@ -240,7 +265,7 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 		% Second column on same line than first one
 		\column{0.5}
 	    %==============================================
-		\block[titlewidthscale=0.5]{Optimisation}{
+		\block[titlewidthscale=0.4]{Optimisation}{
 
            \parbox{0.5\linewidth}{
               
@@ -265,6 +290,8 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 			     \vspace{0.5cm}
 			    
 			     $\rightarrow$ such optimisations can in practice be used to reconcile conflicting stakeholders at different scales
+			   
+			   \vspace{0.9cm}
 			     
 		      }
 		
@@ -282,10 +309,10 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 
 		
 		%==============================================
-		\block[titlewidthscale=0.5]{Diversity search}{
+		\block[titlewidthscale=0.4]{Diversity search}{
 
             
-            \parbox{0.5\linewidth}{
+            \parbox{0.45\linewidth}{
               
               \includegraphics[width=\linewidth]{../figures/pse-psi-delta-utility_colorGamma_sizetheta.png}
     %\textit{Scatter plot between $\Psi (U)$ and $\Delta (U)$, obtained with the PSE diversity search algorithm. Point colour gives $\Gamma (U)$ and point size the innovation threshold $\theta$.}
@@ -294,19 +321,19 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
             \hspace{0.5cm}
             \parbox{0.48\linewidth}{
 			    
-			    Application of the \textbf{PSE diversity search algorithm} \cite{cherel2015beyond} to obtain the feasible space of emergence regimes
+			    Application of the \textbf{PSE diversity search algorithm} \cite{cherel2015beyond} to obtain the feasible space of emergence regimes.
 			    
-			    \vspace{0.5cm}
+			    \vspace{0.2cm}
 			    
 			    % The point cloud obtained is shown in Fig.~\ref{fig:pse}. We find a rather covering cloud, meaning that the model covers a great variety of regimes of emergence. A part of the points are gathered around $\Psi \sim 0$ for varying $\Delta$, corresponding to cases with no causal emergence but downward causation. Several points, disseminated across the cloud, have a value of $\Gamma$ close to 0, implying an autonomy between scale for the positive $\Psi$. $\Delta$ is never negative nor close to 0, meaning that downward causation always occurs, what could have been expected through the explicit top-down feedback process. Altogether, this last experiments confirms that the model captures strong emergence, but also a great variety of causal regimes between scales.
 			    
 			    $\rightarrow$ downward causation always occurs ($\Delta > 0$)
 			    
-			     \vspace{0.5cm}
+			     \vspace{0.2cm}
 			    
 			     $\rightarrow$ many regimes with causal emergence ($\Psi > 0$) and with autonomy between scales ($\Gamma \sim 0$)
 			     
-			      \vspace{0.5cm}
+			      \vspace{0.2cm}
 			     
 			     $\rightarrow$ scale coupling is confirmed useful as strong emergence is captured
 			     
@@ -318,41 +345,54 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 		% Second column on same line than first one
 		\column{0.5}
 	    %==============================================
-		\block[titlewidthscale=0.5]{Discussion}{
+		\block[titlewidthscale=0.4]{Discussion}{
 
+% We have introduced a multi-scalar model for innovation dynamics in systems of cities. Our numerical experiments show, beyond basic model validation and exploration, that (i) contradictory objectives can be optimised through policies across scales, suggesting that this type of approach could further be explored for territorial sustainability; (ii) strong emergence and a great diversity of emergence regimes are captured by the model - confirming the relevance of strongly coupling scale and building such a ``complicated'' model, beyond a single scale.
+%Several limits can at this stage be identified, and should be considered for future extensions. The unidimensional innovation space is a strong limitation, keeping the model abstract and difficult to link with data. The economic structure and processes is also very simplified, as we are closer to a phenomenological model. Coupling with economic agent-based models is a perspective for this issue. Regarding the time scales and evolution of urban areas, we also did not include migration of employees - assuming constant team sizes - what is fine with the idea of reinitialised settings at each macro time step, but what would cause more problems if we add memories to companies and employees. In that context, team diversity is crucial for innovation, but the role of sizes and their evolution in time is less clear \citep{hoisl2017r} - so translating population migration directly into firm sizes may not be the best solution. We did not include changes in macro parameters as \cite{raimbault2021strong} does, what could be a way to incorporate more bottom-up feedback in the model.
+%Finally, future developments on empirical data would need some model adaptation and complicated data collection and processing work. In particular, finding proxies for innovation, and also collecting firm data which is quite rare, are crucial issues. Such an empirical approach would however be necessary for real-world applications of the model beyond stylised policies.
            
-            %\vspace{1cm}
+            \vspace{1cm}
             
 			\begin{itemize}
-				\item Possible extensions and refinements include more detailed economic processes
-				\item Future application on real urban systems requires innovation data across scales
+				\item Main results: proof-of-concept for a \textbf{bi-objective optimisation across scales}, towards policy applications; \textbf{diversity of emergence regimes} produced by the model
+				%\vspace{0.2cm}
+				\item Possible extensions and refinements include more detailed economic processes: higher dimension of the innovation space, economic structure for companies, coupling with economic agent-based models, migration of ideas (employees) between urban areas, bottom-up feedback through a change of macro parameters
+				%\vspace{0.2cm}
+				\item Future application on real urban systems requires innovation data across scales: adaptation of the model to fit specific data, patent data only a proxy of innovation, firm data not open
+           
+           
+           %\vspace{0.5cm}
            
 			\end{itemize}
 		
 		}
 		
 		
+		\end{columns}
+		
 		%==============================================
 		% bibliography managed with natbib
 		
-		\block[titlewidthscale=0.25,bodyoffsety=1.8cm,titleoffsety=.1cm]{References}{
+		
+		
+		\block[titlewidthscale=0.4,bodyoffsety=1.8cm,titleoffsety=.1cm]{References}{
 			% This command is to prevent the printing of a second "références" in text and to delete white space between block title and bibliography
          
 			\renewcommand\refname{\vskip -2cm}
 			
             \small
             
-   			%\begin{multicols}{2}
+   			\begin{multicols}{2}
    			
 			\bibliography{../biblio}
 			% Plain style so that cited articles appear as number in the poster and are only fully displayed here
 			\bibliographystyle{plain}
 			
-			%\end{multicols}
+			\end{multicols}
 		}
 		
 		
-	\end{columns}	
+	
 	
 	
 		
@@ -360,7 +400,7 @@ $^2$ UMR CNRS 8504 Géographie-cités, Université Paris 1}
 	    %==============================================	
 	
 	
-\node [above right,outer sep=20pt,minimum width=\textwidth,align=center,draw=none,fill=none, text = IGNGrisFonce] at (bottomleft) {\centering \huge \bf ALife 2023};
+\node [above right,outer sep=20pt,minimum width=\textwidth,align=center,draw=none,fill=none, text = IGNGrisFonce] at (bottomleft) {\centering \huge \bf The 2023 Conference on Artificial Life - 24-28th July, 2023 - Sapporo, Japan};
 
 \end{document}
 
